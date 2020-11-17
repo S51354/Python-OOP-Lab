@@ -1,0 +1,37 @@
+class FeeSavingsAccount:
+    def _init_(self, balance = 0): #initialize
+        self.balance = balance
+        self.pin = 1122
+        
+    def checkPin(self, value): #check pin code
+        return self.pin == value
+
+    def Deposit(self, pin, deposit_amount = 0): #deposit
+        if self.checkPin(pin):
+            self.deposit_amount = deposit_amount
+            self.balance += deposit_amount
+            return self.balance
+        else:
+            print("WRONG PIN CODE.")
+    
+    def Withdrawal(self, pin, withdraw_amount = 0, charge = 1): #withdraw w/ charge
+        if self.checkPin(pin):
+            if withdraw_amount < self.balance:
+                self.Charge = charge #instant variable
+                self.balance -= withdraw_amount + charge
+                return self.balance
+            else:
+                print("INSUFFICIENT BALANCE.")
+        else:
+            print("INVALID PIN CODE.")
+            
+    def checkBalance(self, pin): #check balance
+        if self.checkPin(pin):
+            return self.balance
+        else:
+            print("INVALID PIN CODE.")           
+                       
+Acc = FeeSavingsAccount()
+Acc.Deposit(1122, 100)
+Acc.Withdrawal(1122, 20)
+Acc.checkBalance(1122)
